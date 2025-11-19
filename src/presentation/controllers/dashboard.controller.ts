@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { plainToInstance, instanceToPlain } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import type { Request } from 'express';
 import { DashboardService } from '../../application/services/dashboard.service';
 import { DashboardResponseDto } from '../dto/dashboard.response.dto';
@@ -48,13 +48,9 @@ export class DashboardController {
       const tenantId = request.tenantId;
       const datos = await this.dashboardService.obtenerDashboard(tenantId);
 
-      const dto = plainToInstance(DashboardResponseDto, datos, {
+      return plainToInstance(DashboardResponseDto, datos, {
         excludeExtraneousValues: true,
       });
-
-      return instanceToPlain(dto, {
-        excludeExtraneousValues: true,
-      }) as DashboardResponseDto;
     } catch (error) {
       this.logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);

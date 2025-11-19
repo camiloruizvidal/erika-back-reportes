@@ -5,6 +5,7 @@ import { ClienteModel } from '../models/cliente.model';
 import { TenantModel } from '../models/tenant.model';
 import { TenantPlanModel } from '../models/tenant-plan.model';
 import { EEstadoCuentaCobro } from '../../../domain/enums/estado-cuenta-cobro.enum';
+import { Transformador } from '../../../utils/transformador.util';
 import {
   IDashboardKpi,
   IAlertaRapida,
@@ -373,7 +374,11 @@ export class DashboardRepository {
       limit: limite,
     });
 
-    return movimientos.map((movimiento: any) => ({
+    const movimientosTransformados = Transformador.extraerDataValues<any[]>(
+      movimientos,
+    );
+
+    return movimientosTransformados.map((movimiento: any) => ({
       id: movimiento.id,
       cliente: movimiento.cliente?.nombreCompleto || 'Sin nombre',
       valor: Number(movimiento.valorTotal) || 0,
