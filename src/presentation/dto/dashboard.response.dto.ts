@@ -1,42 +1,69 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
 
 export class DashboardKpiDto {
-  @ApiProperty({ description: 'Total facturado en el mes actual', type: Number })
+  @ApiProperty({
+    description: 'Total facturado en el mes actual',
+    type: Number,
+  })
   @Expose({ name: 'totalFacturado' })
   total_facturado!: number;
 
-  @ApiProperty({ description: 'Total recaudado en el mes actual', type: Number })
+  @ApiProperty({
+    description: 'Total recaudado en el mes actual',
+    type: Number,
+  })
   @Expose({ name: 'totalRecaudado' })
   total_recaudado!: number;
 
-  @ApiProperty({ description: 'Ingresos de Erika (comisiones + suscripciones)', type: Number })
+  @ApiProperty({
+    description: 'Ingresos de Erika (comisiones + suscripciones)',
+    type: Number,
+  })
   @Expose({ name: 'ingresosErika' })
   ingresos_erika!: number;
 
-  @ApiProperty({ description: 'Cantidad de cuentas generadas en el mes', type: Number })
+  @ApiProperty({
+    description: 'Cantidad de cuentas generadas en el mes',
+    type: Number,
+  })
   @Expose({ name: 'cuentasGeneradas' })
   cuentas_generadas!: number;
 
-  @ApiProperty({ description: 'Variación porcentual del total facturado', type: Number })
+  @ApiProperty({
+    description: 'Variación porcentual del total facturado',
+    type: Number,
+  })
   @Expose({ name: 'variacionFacturado' })
   variacion_facturado!: number;
 
-  @ApiProperty({ description: 'Variación porcentual del total recaudado', type: Number })
+  @ApiProperty({
+    description: 'Variación porcentual del total recaudado',
+    type: Number,
+  })
   @Expose({ name: 'variacionRecaudado' })
   variacion_recaudado!: number;
 
-  @ApiProperty({ description: 'Variación porcentual de ingresos de Erika', type: Number })
+  @ApiProperty({
+    description: 'Variación porcentual de ingresos de Erika',
+    type: Number,
+  })
   @Expose({ name: 'variacionIngresosErika' })
   variacion_ingresos_erika!: number;
 
-  @ApiProperty({ description: 'Variación porcentual de cuentas generadas', type: Number })
+  @ApiProperty({
+    description: 'Variación porcentual de cuentas generadas',
+    type: Number,
+  })
   @Expose({ name: 'variacionCuentasGeneradas' })
   variacion_cuentas_generadas!: number;
 }
 
 export class AlertaRapidaDto {
-  @ApiProperty({ description: 'Tipo de alerta', enum: ['vencen_hoy', 'atrasados', 'pago_parcial', 'bloqueada'] })
+  @ApiProperty({
+    description: 'Tipo de alerta',
+    enum: ['vencen_hoy', 'atrasados', 'pago_parcial', 'bloqueada'],
+  })
   @Expose()
   tipo!: string;
 
@@ -44,7 +71,10 @@ export class AlertaRapidaDto {
   @Expose()
   mensaje!: string;
 
-  @ApiProperty({ description: 'Cantidad relacionada con la alerta', type: Number })
+  @ApiProperty({
+    description: 'Cantidad relacionada con la alerta',
+    type: Number,
+  })
   @Expose()
   cantidad!: number;
 }
@@ -82,7 +112,10 @@ export class ClientePrincipalDto {
   @Expose({ name: 'nombreCliente' })
   nombre_cliente!: string;
 
-  @ApiProperty({ description: 'Monto total pagado por el cliente', type: Number })
+  @ApiProperty({
+    description: 'Monto total pagado por el cliente',
+    type: Number,
+  })
   @Expose({ name: 'montoTotal' })
   monto_total!: number;
 }
@@ -101,15 +134,18 @@ export class EstadoCuentasDto {
   vencidas!: number;
 
   @ApiProperty({ description: 'Porcentaje de cuentas pagadas', type: Number })
-  @Expose()
+  @Expose({ name: 'porcentajePagadas' })
   porcentaje_pagadas!: number;
 
-  @ApiProperty({ description: 'Porcentaje de cuentas pendientes', type: Number })
-  @Expose()
+  @ApiProperty({
+    description: 'Porcentaje de cuentas pendientes',
+    type: Number,
+  })
+  @Expose({ name: 'porcentajePendientes' })
   porcentaje_pendientes!: number;
 
   @ApiProperty({ description: 'Porcentaje de cuentas vencidas', type: Number })
-  @Expose()
+  @Expose({ name: 'porcentajeVencidas' })
   porcentaje_vencidas!: number;
 }
 
@@ -131,11 +167,15 @@ export class UltimoMovimientoDto {
   estado!: string;
 
   @ApiProperty({ description: 'Fecha de creación', type: Date })
-  @Expose()
+  @Expose({ name: 'fecha' })
   fecha!: Date;
 
-  @ApiProperty({ description: 'Link de pago (si existe)', type: String, nullable: true })
-  @Expose()
+  @ApiProperty({
+    description: 'Link de pago (si existe)',
+    type: String,
+    nullable: true,
+  })
+  @Expose({ name: 'linkPago' })
   link_pago!: string | null;
 }
 
@@ -148,7 +188,11 @@ export class HistoricoPagoDto {
   @Expose()
   monto!: number;
 
-  @ApiProperty({ description: 'Referencia de pago', type: String, nullable: true })
+  @ApiProperty({
+    description: 'Referencia de pago',
+    type: String,
+    nullable: true,
+  })
   @Expose()
   referencia!: string | null;
 }
@@ -158,15 +202,27 @@ export class EstadoSuscripcionDto {
   @Expose({ name: 'planNombre' })
   plan_nombre!: string;
 
-  @ApiProperty({ description: 'Límite de clientes', type: Number, nullable: true })
+  @ApiProperty({
+    description: 'Límite de clientes',
+    type: Number,
+    nullable: true,
+  })
   @Expose({ name: 'limiteClientes' })
   limite_clientes!: number | null;
 
-  @ApiProperty({ description: 'Límite de servicios', type: Number, nullable: true })
+  @ApiProperty({
+    description: 'Límite de servicios',
+    type: Number,
+    nullable: true,
+  })
   @Expose({ name: 'limiteServicios' })
   limite_servicios!: number | null;
 
-  @ApiProperty({ description: 'Fecha de renovación', type: Date, nullable: true })
+  @ApiProperty({
+    description: 'Fecha de renovación',
+    type: Date,
+    nullable: true,
+  })
   @Expose({ name: 'fechaRenovacion' })
   fecha_renovacion!: Date | null;
 
@@ -176,40 +232,63 @@ export class EstadoSuscripcionDto {
 
   @ApiProperty({ description: 'Histórico de pagos', type: [HistoricoPagoDto] })
   @Expose({ name: 'historicoPagos' })
+  @Type(() => HistoricoPagoDto)
   historico_pagos!: HistoricoPagoDto[];
 }
 
 export class DashboardResponseDto {
   @ApiProperty({ description: 'KPIs principales', type: DashboardKpiDto })
   @Expose()
+  @Type(() => DashboardKpiDto)
   kpis!: DashboardKpiDto;
 
   @ApiProperty({ description: 'Alertas rápidas', type: [AlertaRapidaDto] })
   @Expose()
+  @Type(() => AlertaRapidaDto)
   alertas!: AlertaRapidaDto[];
 
-  @ApiProperty({ description: 'Gráfica de facturado vs recaudado', type: [GraficaFacturadoRecaudadoDto] })
+  @ApiProperty({
+    description: 'Gráfica de facturado vs recaudado',
+    type: [GraficaFacturadoRecaudadoDto],
+  })
   @Expose({ name: 'graficaFacturadoRecaudado' })
+  @Type(() => GraficaFacturadoRecaudadoDto)
   grafica_facturado_recaudado!: GraficaFacturadoRecaudadoDto[];
 
-  @ApiProperty({ description: 'Gráfica de pagos por día', type: [GraficaPagosPorDiaDto] })
+  @ApiProperty({
+    description: 'Gráfica de pagos por día',
+    type: [GraficaPagosPorDiaDto],
+  })
   @Expose({ name: 'graficaPagosPorDia' })
+  @Type(() => GraficaPagosPorDiaDto)
   grafica_pagos_por_dia!: GraficaPagosPorDiaDto[];
 
-  @ApiProperty({ description: 'Clientes principales', type: [ClientePrincipalDto] })
+  @ApiProperty({
+    description: 'Clientes principales',
+    type: [ClientePrincipalDto],
+  })
   @Expose({ name: 'clientesPrincipales' })
+  @Type(() => ClientePrincipalDto)
   clientes_principales!: ClientePrincipalDto[];
 
   @ApiProperty({ description: 'Estado de cuentas', type: EstadoCuentasDto })
   @Expose({ name: 'estadoCuentas' })
+  @Type(() => EstadoCuentasDto)
   estado_cuentas!: EstadoCuentasDto;
 
-  @ApiProperty({ description: 'Últimos movimientos', type: [UltimoMovimientoDto] })
+  @ApiProperty({
+    description: 'Últimos movimientos',
+    type: [UltimoMovimientoDto],
+  })
   @Expose({ name: 'ultimosMovimientos' })
+  @Type(() => UltimoMovimientoDto)
   ultimos_movimientos!: UltimoMovimientoDto[];
 
-  @ApiProperty({ description: 'Estado de suscripción', type: EstadoSuscripcionDto })
+  @ApiProperty({
+    description: 'Estado de suscripción',
+    type: EstadoSuscripcionDto,
+  })
   @Expose({ name: 'estadoSuscripcion' })
+  @Type(() => EstadoSuscripcionDto)
   estado_suscripcion!: EstadoSuscripcionDto;
 }
-
