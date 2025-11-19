@@ -54,11 +54,10 @@ export class DashboardController {
 
       return instanceToPlain(dto, {
         excludeExtraneousValues: true,
-      }) as any;
+      }) as DashboardResponseDto;
     } catch (error) {
       this.logger.error({ error: JSON.stringify(error) });
       this.manejadorError.resolverErrorApi(error);
     }
   }
 }
-
